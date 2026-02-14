@@ -81,8 +81,8 @@ export default function CartPage() {
         cart.forEach((item) => {
             message += `• ${item.name} (${item.period}) x${item.quantity} - $${(item.price * item.quantity).toFixed(2)}\n`;
         });
-        message += `\n💰 *Total Price: $${totalPrice.toFixed(2)}*`;
-        message += `\n👤 *Customer Name:* ${name}`;
+        message += `\n *Total Price: $${totalPrice.toFixed(2)}*`;
+        message += `\n *Customer Name:* ${name}`;
 
         const url = `https://wa.me/${ownerPhone}?text=${encodeURIComponent(message)}`;
         window.open(url, "_blank");
