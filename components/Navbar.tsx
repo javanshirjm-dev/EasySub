@@ -1,0 +1,109 @@
+// components/Navbar.tsx
+"use client";
+
+import Link from "next/link";
+import { ShoppingCart, Zap } from "lucide-react";
+import { useCart } from "@/context/CartContext";
+import { useEffect, useState } from "react";
+
+export default function Navbar() {
+    const { totalItems } = useCart();
+    const [time, setTime] = useState("");
+
+    useEffect(() => {
+        const updateTime = () => {
+            const now = new Date();
+            setTime(now.toLocaleTimeString('en-US', { hour12: false }));
+        };
+        updateTime();
+        const interval = setInterval(updateTime, 1000);
+        return () => clearInterval(interval);
+    }, []);
+
+    return (
+        <nav className="fixed top-0 w-full z-50 bg-black/95 backdrop-blur-sm border-b border-cyan-500/30">
+            {/* Corner accents */}
+            <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-cyan-400" />
+            <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-cyan-400" />
+
+            <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+                {/* Left: Logo + System Status */}
+                <div className="flex items-center gap-6">
+                    <Link href="/" className="flex items-center gap-2 group">
+                        {/* Logo with glow effect */}
+                        <div className="relative">
+                            <div className="absolute inset-0 bg-cyan-500 blur-md opacity-50 group-hover:opacity-75 transition-opacity" />
+                            <div className="relative w-8 h-8 bg-cyan-500 border border-cyan-400">
+                                <div className="absolute inset-1 bg-black" />
+                                <Zap size={16} className="absolute inset-0 m-auto text-cyan-500" />
+                            </div>
+                        </div>
+                        {/* Brand text with glitch effect on hover */}
+                        <span className="font-mono text-base tracking-widest text-cyan-400 group-hover:text-cyan-300 transition-colors font-bold">
+                            EASYSUB
+                        </span>
+                    </Link>
+
+                    {/* System status indicator */}
+                    <div className="hidden md:flex items-center gap-2 font-mono text-xs text-gray-600 border-l border-cyan-500/20 pl-4">
+                        <div className="flex items-center gap-1.5">
+                            <div className="w-1.5 h-1.5 bg-green-400 animate-pulse" />
+                            <span>ONLINE</span>
+                        </div>
+                        <span className="text-cyan-500/50">|</span>
+                        <span>{time}</span>
+                    </div>
+                </div>
+
+                {/* Right: Cart */}
+                <Link href="/cart" className="relative group">
+                    <div className="relative p-2.5 border border-cyan-500/30 hover:border-cyan-500 hover:bg-cyan-500/10 transition-all duration-200">
+                        {/* Corner indicators */}
+                        <div className="absolute -top-0.5 -left-0.5 w-1.5 h-1.5 bg-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity" />
+                        <div className="absolute -top-0.5 -right-0.5 w-1.5 h-1.5 bg-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity" />
+                        <div className="absolute -bottom-0.5 -left-0.5 w-1.5 h-1.5 bg-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity" />
+                        <div className="absolute -bottom-0.5 -right-0.5 w-1.5 h-1.5 bg-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity" />
+
+                        <ShoppingCart size={18} className="text-cyan-400 group-hover:text-cyan-300 transition-colors" />
+                    </div>
+
+                    {/* Cart counter badge */}
+                    {totalItems > 0 && (
+                        <span className="absolute -top-2 -right-2 bg-cyan-500 text-black text-xs font-mono font-bold w-5 h-5 flex items-center justify-center border border-cyan-400 shadow-lg shadow-cyan-500/50 animate-pulse-slow">
+                            {totalItems}
+                        </span>
+                    )}
+
+                </Link>
+            </div>
+
+            {/* Animated scanline effect */}
+            <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-500 to-transparent opacity-50 animate-pulse-slow" />
+
+            {/* Subtle moving gradient */}
+            <div className="absolute bottom-0 left-0 right-0 h-px overflow-hidden">
+                <div className="h-full w-20 bg-gradient-to-r from-transparent via-cyan-400 to-transparent animate-scan-horizontal" />
+            </div>
+
+            <style jsx>{`
+                @keyframes pulse-slow {
+                    0%, 100% { opacity: 1; }
+                    50% { opacity: 0.6; }
+                }
+
+                @keyframes scan-horizontal {
+                    0% { transform: translateX(-100%); }
+                    100% { transform: translateX(500%); }
+                }
+
+                .animate-pulse-slow {
+                    animation: pulse-slow 2s ease-in-out infinite;
+                }
+
+                .animate-scan-horizontal {
+                    animation: scan-horizontal 3s linear infinite;
+                }
+            `}</style>
+        </nav>
+    );
+}
