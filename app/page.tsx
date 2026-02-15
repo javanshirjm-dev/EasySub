@@ -2,11 +2,9 @@
 'use client';
 import ProductCard from "@/components/ProductCard";
 import Footer from "@/components/Footer";
-import HeroBanner from "@/components/HeroBanner";
 import { Product } from "@/types";
 import { useEffect, useRef } from "react";
 import { useSearch } from "@/context/SearchContext"; // Import Search
-import MovieBanner from "@/components/MovieBanner";
 
 const products: Product[] = [
   {
@@ -126,8 +124,7 @@ export default function Home() {
   return (
     <main className="relative min-h-screen bg-black">
 
-      <MovieBanner />
-      <HeroBanner />
+
       {/* Grid background pattern */}
       <div className="fixed inset-0 opacity-20">
         <div className="absolute inset-0" style={{
@@ -147,7 +144,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-cyan-500/10 to-transparent animate-scanline" />
       </div>
 
-      <div className="relative pt-1 pb-16 px-4 max-w-6xl mx-auto">
+      <div className="relative pt-29 pb-16 px-4 max-w-6xl mx-auto">
         {/* Header */}
         <div className="mb-16">
           <div className="inline-block border border-cyan-500/30 px-3 py-1 mb-6">

@@ -76,23 +76,7 @@ export default function Navbar() {
                     </Link>
                 </div>
 
-                {/* Center: Search Bar */}
-                {/* Mobile: Order-last (bottom row), w-full. Desktop: Order-2 (middle), flex-1 */}
-                <div className="order-3 md:order-2 w-full md:w-auto md:flex-1 md:mx-8 max-w-full md:max-w-2xl">
-                    <div className="relative w-full group">
-                        <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                            <Search size={14} className="text-cyan-500/40 group-focus-within:text-cyan-400 transition-colors" />
-                        </div>
-                        <input
-                            type="text"
-                            value={searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
-                            placeholder="SEARCH_DATABASE..."
-                            className="w-full bg-black/40 border border-cyan-500/20 text-cyan-100 text-xs font-mono py-2.5 pl-9 pr-3 focus:outline-none focus:border-cyan-500/60 focus:bg-cyan-950/10 placeholder-cyan-500/30 transition-all uppercase tracking-wider rounded-none"
-                        />
-                        <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-cyan-500/30 group-focus-within:border-cyan-400 transition-colors" />
-                    </div>
-                </div>
+
             </div>
 
             {/* Scanlines */}
